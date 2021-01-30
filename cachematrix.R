@@ -1,9 +1,11 @@
 ## makeCacheMatrix() creates an R object that stores a matrix and its inverse
+
 ## casheSolve() requires an argument that is returned by makeCacheMatrix() 
 #in order to retrieve the inverse of 'x' from the cached value that is stored 
 #in the makeCacheMatrix() object's environment.
 
 makeCacheMatrix <- function(x = matrix()) {
+        #initialising local variable inv
         inv <- NULL
         #each time set function is executed, x and inv are reset,
         #if i first create myMatrix with makeCasheMatrix function,
@@ -15,7 +17,7 @@ makeCacheMatrix <- function(x = matrix()) {
                 x <<- y
                 inv <<- NULL
         }
-        #this function is to check the current data = matrix 
+        #get function is to check the current data = matrix 
         #which is used to calculate the inverse
         get <-  function() {
                 x
@@ -28,7 +30,7 @@ makeCacheMatrix <- function(x = matrix()) {
         #getinv function is for later use in casheSolve to check if the inverse matrix
         #has already been calculated
         getinv <- function () inv
-        #creating a named list with functions,
+        #last step = creating a named list with functions,
         #to be able to access functions using '$' Symbol
         list(set = set, get = get,
              setinv = setinv,
@@ -37,7 +39,6 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
 
 casheSolve <- function(x, ...) {
         #making use of getinv function, defined in makeCacheMatrix
